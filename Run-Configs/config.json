@@ -1,0 +1,11 @@
+{
+    "spreadsheet_id": "1Ep5mpfrMjA9g9Acuu_7G1t7L97mmPb--rgKJ7SbF6W4",
+    "root_folder_id": "1T8Wl9MwTFGoF5Tr5I_pWWNk5yB-37pBk",
+    "initialized": true,
+    "use_cv": "Files/myCV.pdf",
+    "B_always_initialize": true,
+    "B_read_manual_input_mode": true,
+    "B_apply": true,
+    "B_clean_up": true,
+    "V_min_score": 70
+}

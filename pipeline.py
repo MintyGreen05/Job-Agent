@@ -222,8 +222,8 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                     job["date_found"],
                     "AI Generated",
                     job.get("job_url", ""),
-                    "CV.pdf",
-                    "Yes",
+                    get_field_value("use_cv", CONFIG_PATH),
+                    "No",
                     ai_model_used2,
                     job_folder_url,
                     ""

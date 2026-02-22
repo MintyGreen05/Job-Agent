@@ -115,12 +115,42 @@ def read_json_text(json_text):
     """
     Converts AI-generated JSON text into a Python dictionary.
     """
-    import json
     try:
         return json.loads(json_text)
     except json.JSONDecodeError as e:
         print("❌ Failed to parse JSON text:", e)
         return {}
+    
+
+def remove_from_input_by_url(job_url, json_file_path):
+    """
+    Removes a job from input.json using job_url.
+    """
+
+    # Load full file
+    with open(json_file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    jobs = data.get("inputs", [])
+
+    original_length = len(jobs)
+
+    # Remove matching jobs
+    jobs = [job for job in jobs if job.get("job_url") != job_url]
+
+    if len(jobs) == original_length:
+        print("⚠️ Job not found.")
+        return False
+
+    # Update structure
+    data["inputs"] = jobs
+
+    # Write back full structure
+    with open(json_file_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
+
+    print("✅ Job removed and file updated.")
+    return True
 
 if __name__ == "__main__":
     print(cv_to_text())

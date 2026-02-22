@@ -6,15 +6,17 @@ from Interfaces.sheets_interface import append_sheet, read_sheet, update, get_sh
 from Interfaces.drive_interface import create_root_folder, create_job_folder, upload_job_file, move_file_to_folder
 from Interfaces.artifact_generator import generate_job_artifacts, cleanup_job_artifacts
 from Interfaces.ai_client import call_ai
-from Interfaces.helpers import cv_to_text, write_log, generate_hash, read_json_text, get_field_value, set_field_value
+from Interfaces.helpers import cv_to_text, remove_from_input_by_url, write_log, generate_hash, read_json_text, get_field_value, set_field_value
 from Interfaces.input_reader import read_jobs_from_json, job_object_to_json_text
 
 CONFIG_PATH = "Run-Configs/config.json"
 LOG_FILE = "Files/logs.txt"
 if get_field_value("B_read_manual_input_mode", CONFIG_PATH):
     INPUT_JSON_PATH = "Run-Configs/input.json"
-EVALUATION_PATH = "Run-Configs/evaluation-prompt.json"
-GENERATION_PATH = "Run-Configs/generation-prompt.json"
+else:
+    INPUT_JSON_PATH = "Job-Scrapers/pending-input.json"
+EVALUATION_PATH = get_field_value("use_evaluation", CONFIG_PATH) or "Run-Configs/evaluation-prompt.json"
+GENERATION_PATH = get_field_value("use_generation", CONFIG_PATH) or "Run-Configs/generation-prompt.json"
 ROOT_FOLDER_NAME = "JobAgent"
 LISTINGS_SHEET_NAME = "Listings"
 APPLICATIONS_SHEET_NAME = "Applications"
@@ -95,6 +97,7 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
     - Append evaluation to Listings
     - Generate artifacts if evaluation passes
     """
+    applications_made = 0
 
     for job in jobs:
         print("\n---------------------------\n")
@@ -123,12 +126,35 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
         write_log(LOG_FILE, "Sending job to AI for evaluation")
         print("🤖 Evaluating job via AI...")
 
-        evaluation_json_text, ai_model_used1 = call_ai(
-            description=eval_prompt,
-            prompt=get_field_value("prompt", EVALUATION_PATH),
-            additional = get_field_value("requirements", EVALUATION_PATH),
-            additional2 = cv_text
-        )
+        if get_field_value("B_dummy_evaluation_ai", CONFIG_PATH):
+            evaluation_json_text = """
+                        {"score": 82,
+            "strengths": [
+                "Role is located in central Berlin with hybrid flexibility",
+                "Position is explicitly junior-level and student-friendly",
+                "Core technologies (Python, REST APIs, SQL) match user requirements",
+                "Part-time workload (20 hours per week) aligns with constraints",
+                "Compensation is clearly stated and paid"
+            ],
+            "weaknesses": [
+                "Limited exposure to cloud infrastructure mentioned",
+                "Frontend technologies are not part of the stack"
+            ],
+            "risks": [
+                "Company is an early-stage startup with potential stability concerns",
+                "Tech stack includes a niche framework that may limit transferability"
+            ],
+            "reasoning_summary": "The position satisfies all major hard constraints including location in Berlin, junior seniority, part-time workload, and paid compensation. The technical stack aligns well with the user's core software engineering focus, particularly in backend development. Minor weaknesses exist in limited cloud exposure and niche tooling. Overall, this represents a strong strategic fit with manageable risks.",
+            "email": "jobs@techstartup-berlin.de"
+            }"""
+            ai_model_used1 = "Dummy Eval Model"
+        else:
+            evaluation_json_text, ai_model_used1 = call_ai(
+                description=eval_prompt,
+                prompt=get_field_value("prompt", EVALUATION_PATH),
+                additional = get_field_value("requirements", EVALUATION_PATH),
+                additional2 = cv_text
+            )
         #print(evaluation_json_text)
         evaluation_json = read_json_text(evaluation_json_text)
         job.update(evaluation_json)
@@ -173,11 +199,23 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                 print(f"✍️ Generating artifacts for job {job['job_title']}...")
 
                  # Use call_ai to generate message, email, and cover letter
-                artifact_json_text, ai_model_used2 = call_ai(
-                    prompt=get_field_value("prompt", GENERATION_PATH),
-                    description=job_object_to_json_text(job), 
-                    additional = cv_text,
-                    additional2="")
+
+                if get_field_value("B_dummy_generation_ai", CONFIG_PATH):
+                    artifact_json_text = """
+                    {
+                    "message": "Hello, I recently came across your Junior Software Engineer position in Berlin and was immediately interested. With hands-on experience in Python backend development and REST API design, I believe my technical background aligns well with your current needs. I would welcome the opportunity to contribute and learn more about your engineering team.",
+                    "email_subject": "Application for Junior Software Engineer - Berlin",
+                    "email": "Dear Hiring Team,\\n\\nI am writing to express my interest in the Junior Software Engineer position based in Berlin. With practical experience in Python development, API integration, and database management, I am confident in my ability to contribute effectively to your team.\\n\\nThrough academic and project-based experience, I have built and deployed backend systems, worked with SQL databases, and collaborated in agile environments. I am particularly drawn to your company's focus on scalable backend systems and innovative product development.\\n\\nI would greatly appreciate the opportunity to further discuss how my background aligns with your needs and how I can contribute to your team. I look forward to your response.\\n\\nKind regards,\\nMax Mustermann",
+                    "cover_letter": "Max Mustermann\\nBerlin, Germany\\n\\nDear Hiring Team,\\n\\nI am excited to apply for the Junior Software Engineer position in Berlin. The role strongly aligns with my academic background in Computer Science and my hands-on experience building backend applications using Python and RESTful APIs.\\n\\nDuring my academic projects and practical work, I developed backend services, implemented database schemas using SQL, and contributed to collaborative software development in agile teams. I focused on writing clean, maintainable code and ensuring reliable system performance.\\n\\nIn previous projects, I took ownership of backend modules that improved data processing efficiency and reduced response times. I consistently prioritize writing structured, scalable code while maintaining strong collaboration with team members.\\n\\nI am eager to bring my technical skills, motivation, and problem-solving mindset to your engineering team. I would welcome the opportunity to discuss how I can contribute to your continued success.\\n\\nSincerely,\\nMax Mustermann"
+                    }
+                    """
+                    ai_model_used2 = "Dummy Gen Model"
+                else:
+                    artifact_json_text, ai_model_used2 = call_ai(
+                        prompt=get_field_value("prompt", GENERATION_PATH),
+                        description=job_object_to_json_text(job), 
+                        additional = cv_text,
+                        additional2="")
 
                 artifact_json = read_json_text(artifact_json_text)
 
@@ -202,6 +240,23 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                     mimetype = "application/pdf" if name == "cover_letter" else "text/plain"
                     upload_job_file(job_folder_id, path, f"{name}.{'pdf' if name=='cover_letter' else 'txt'}", mimetype)
 
+                
+
+                email_sent = False
+                if get_field_value("B_apply_email", CONFIG_PATH) and (job["email"] != "N/A" and job["email"] != ""):
+                    write_log(LOG_FILE, f"Sending application email for job {job_id}")
+                    print("📧 Sending application email...")
+                    from Interfaces.gmail_interface import send_email
+                    send_email(
+                        to_email=job["email"],
+                        attachment_paths=[get_field_value("use_cv", CONFIG_PATH),artifacts["files"].get("cover_letter", "")],
+                        subject=artifact_json.get("email_subject"),
+                        body_text=artifact_json.get("email")
+                    )
+                    email_sent = True
+                    write_log(LOG_FILE, f"Application email sent for job {job_id}")
+                    print("✅ Application email sent.")
+                
                 # Cleanup local artifacts
                 if get_field_value("B_clean_up",CONFIG_PATH):
                     cleanup_job_artifacts(artifacts["job_dir"])
@@ -223,7 +278,8 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                     "AI Generated",
                     job.get("job_url", ""),
                     get_field_value("use_cv", CONFIG_PATH),
-                    "No",
+                    job.get("email", "N/A"),
+                    email_sent,
                     ai_model_used2,
                     job_folder_url,
                     ""
@@ -231,6 +287,14 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                 append_sheet(spreadsheet_id, APPLICATIONS_SHEET_NAME, app_values)
                 write_log(LOG_FILE, f"Application entry appended for job {job_id}")
                 print(f"📄 Application entry appended to Applications sheet.")
+                applications_made += 1 
+                if applications_made>=get_field_value("V_max_applications_per_run", CONFIG_PATH):
+                    write_log(LOG_FILE, f"Maximum applications per run reached. Stopping further applications.")
+                    print("⚠️ Maximum applications per run reached. Stopping further applications.")
+                    break
+                if get_field_value("B_input_file_culling", CONFIG_PATH):
+                    write_log(LOG_FILE, f"culling from input folder {job['job_url']}")
+                    remove_from_input_by_url(job["job_url"], INPUT_JSON_PATH)
             else:
                 write_log(LOG_FILE, f"Job {job_id} failed evaluation, skipping artifact generation.")
                 print(f"⚠️ Job {job['job_title']} failed evaluation. Skipping artifacts.")

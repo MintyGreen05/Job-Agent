@@ -185,3 +185,224 @@
 [2026-02-21 01:46:18] Artifacts uploaded and local files cleaned for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
 [2026-02-21 01:46:19] Application entry appended for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
 [2026-02-21 01:46:19] === Pipeline Complete ===
+[2026-02-21 15:14:38] === Starting Job Pipeline ===
+[2026-02-21 15:14:38] Initializing project...
+[2026-02-21 15:14:44] Root folder created: 1h-lfqlqMZUpiZghbrh0CWfMdLW0jIeMw
+[2026-02-21 15:14:48] Spreadsheet created: 13Tiz6YDLLh9UH8Sa2xDtVBLHMR4ko2d3OE_fAUnUgM0
+[2026-02-21 15:14:50] Spreadsheet moved to root folder
+[2026-02-21 15:14:50] Reading job inputs...
+[2026-02-21 15:14:50] Read 1 jobs from sheet.
+[2026-02-21 15:14:51] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 15:14:51] Sending job to AI for evaluation
+[2026-02-21 15:15:09] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 15:15:09] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 15:15:09] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 15:15:28] Job folder ready: 1vRDtxSStti27JFsw8HQcQAcdm7i0Am5u
+[2026-02-21 15:15:36] Artifacts uploaded and local files cleaned for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 15:15:38] Application entry appended for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 15:15:38] === Pipeline Complete ===
+[2026-02-21 15:16:57] === Starting Job Pipeline ===
+[2026-02-21 15:16:57] Initializing project...
+[2026-02-21 15:16:58] Root folder created: 1fOZCRAHjjdDalc6rVRaS1fITcPBSKOId
+[2026-02-21 15:17:02] Spreadsheet created: 1sODYmQGvAm8DldMIUv_1TwvzGbRl1srt67P0J8t4nEo
+[2026-02-21 15:17:04] Spreadsheet moved to root folder
+[2026-02-21 15:17:04] Reading job inputs...
+[2026-02-21 15:17:04] Read 1 jobs from sheet.
+[2026-02-21 15:17:05] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 15:17:06] Sending job to AI for evaluation
+[2026-02-21 15:17:25] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 15:17:25] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 15:17:25] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 15:17:43] Job folder ready: 1UO-Oj4SELeWefgR5OB7M3YwGJ_vQ_jfb
+[2026-02-21 15:17:50] Artifacts uploaded and local files cleaned for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 15:17:51] Application entry appended for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 15:17:51] === Pipeline Complete ===
+[2026-02-21 20:44:42] === Starting Job Pipeline ===
+[2026-02-21 20:44:42] Initializing project...
+[2026-02-21 20:44:47] Root folder created: 1AUuyWr9v-m0MZid-Ob5WUbMtcq5uZXdG
+[2026-02-21 20:44:51] Spreadsheet created: 1c2D5rU_FaS2efkGN9nxlUu9QLiG6tMeaV09O7jABMOE
+[2026-02-21 20:44:53] Spreadsheet moved to root folder
+[2026-02-21 20:44:53] Reading job inputs...
+[2026-02-21 20:44:53] Read 4 jobs from sheet.
+[2026-02-21 20:44:53] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 20:44:54] Sending job to AI for evaluation
+[2026-02-21 20:44:56] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:44:56] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 20:44:56] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:44:58] Job folder ready: 1zPJvsnJ_hGBsN7dypEeyjUacfU2tg8H_
+[2026-02-21 20:45:05] Sending application email for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:49:19] === Starting Job Pipeline ===
+[2026-02-21 20:49:19] Initializing project...
+[2026-02-21 20:49:21] Root folder created: 1oSbUDB-xbbMP8yzpcoTuRlBSLQ09K0_k
+[2026-02-21 20:49:26] Spreadsheet created: 1r_M--e5LzVGkDrzrDK8P_CxXEsQ15e_pYGJPwRvBN7g
+[2026-02-21 20:49:28] Spreadsheet moved to root folder
+[2026-02-21 20:49:28] Reading job inputs...
+[2026-02-21 20:49:28] Read 4 jobs from sheet.
+[2026-02-21 20:49:28] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 20:49:29] Sending job to AI for evaluation
+[2026-02-21 20:49:30] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:49:30] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 20:49:30] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:49:31] Job folder ready: 1dm5ra6Z_omKIKcxY1Y1tbGZVeNAF1YSQ
+[2026-02-21 20:49:38] Sending application email for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:51:31] === Starting Job Pipeline ===
+[2026-02-21 20:51:31] Initializing project...
+[2026-02-21 20:51:33] Root folder created: 1zNufoiM1b8V8Cv3uDRsbHtpdu3bTbq42
+[2026-02-21 20:51:39] Spreadsheet created: 1ZDFnAajjL7J__6udK3ok459X0L2rsWpZ1u-tUle29X0
+[2026-02-21 20:51:42] Spreadsheet moved to root folder
+[2026-02-21 20:51:42] Reading job inputs...
+[2026-02-21 20:51:42] Read 4 jobs from sheet.
+[2026-02-21 20:51:42] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 20:51:44] Sending job to AI for evaluation
+[2026-02-21 20:51:45] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:51:45] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 20:51:45] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:51:46] Job folder ready: 1UdEYbTJZToi4S-5lsDVN9vG4NRb_oigs
+[2026-02-21 20:51:53] Sending application email for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:53:59] === Starting Job Pipeline ===
+[2026-02-21 20:53:59] Initializing project...
+[2026-02-21 20:54:00] Root folder created: 11HgWnTULrBecBOhRIK1MDKJe39-RlFvc
+[2026-02-21 20:54:05] Spreadsheet created: 1CsuzETxnSqXtopksKPnWu_O0MtPXjZDLiEGZJUWEgwo
+[2026-02-21 20:54:06] Spreadsheet moved to root folder
+[2026-02-21 20:54:06] Reading job inputs...
+[2026-02-21 20:54:06] Read 4 jobs from sheet.
+[2026-02-21 20:54:07] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 20:54:07] Sending job to AI for evaluation
+[2026-02-21 20:54:08] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:54:08] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 20:54:08] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:54:09] Job folder ready: 1E-J0U-GWGXP3lMct3zcby4B6d5F4Ys2B
+[2026-02-21 20:54:17] Sending application email for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 20:59:47] === Starting Job Pipeline ===
+[2026-02-21 20:59:47] Initializing project...
+[2026-02-21 20:59:48] Root folder created: 11IMfygF3ASmI3T-WHq_gCY2CanuEgGUR
+[2026-02-21 20:59:55] Spreadsheet created: 1uYS3fF4D0Id-A04Rp60ogW8NmI7U1KfKPltzt8I62wc
+[2026-02-21 20:59:57] Spreadsheet moved to root folder
+[2026-02-21 20:59:57] Reading job inputs...
+[2026-02-21 20:59:57] Read 4 jobs from sheet.
+[2026-02-21 20:59:57] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 20:59:59] Sending job to AI for evaluation
+[2026-02-21 21:00:00] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:00:00] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 21:00:00] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:00:01] Job folder ready: 1qCgwht9-sqURIXcPHjJ5dGWVXgUFZKi1
+[2026-02-21 21:00:09] Sending application email for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:00:13] Application email sent for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:00:13] Artifacts uploaded and local files cleaned for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:00:15] Application entry appended for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:00:15] culling from input folder https://www.techinnovators.com/careers/software-engineer
+[2026-02-21 21:00:15] === Pipeline Complete ===
+[2026-02-21 21:03:15] === Starting Job Pipeline ===
+[2026-02-21 21:03:15] Initializing project...
+[2026-02-21 21:03:16] Root folder created: 1l1NUJftf8Fq3ZJEl7AQi9npYXXk2i_zd
+[2026-02-21 21:03:20] Spreadsheet created: 16Z8LHqLDNI8ZuiBMFdKs_ZkrVzZXpYRGdYE18NrqRjc
+[2026-02-21 21:03:22] Spreadsheet moved to root folder
+[2026-02-21 21:03:22] Reading job inputs...
+[2026-02-21 21:03:22] Read 4 jobs from sheet.
+[2026-02-21 21:03:22] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 21:03:23] Sending job to AI for evaluation
+[2026-02-21 21:03:24] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:03:24] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 21:03:24] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:03:25] Job folder ready: 1eXkheADU5W1zLPndl9eQpKsPmCJOGu1A
+[2026-02-21 21:03:33] Sending application email for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:03:37] Application email sent for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:03:37] Artifacts uploaded and local files cleaned for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:03:39] Application entry appended for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:03:39] culling from input folder https://www.techinnovators.com/careers/software-engineer
+[2026-02-21 21:05:14] === Starting Job Pipeline ===
+[2026-02-21 21:05:14] Initializing project...
+[2026-02-21 21:05:15] Root folder created: 1wJ6mEQsQwKx24azv_JIY6J-1g1hez1t8
+[2026-02-21 21:05:20] Spreadsheet created: 15qK_On8-6MBVqrHPNJHSBuEtni3Bow3B6WRqLE8iV2Y
+[2026-02-21 21:05:23] Spreadsheet moved to root folder
+[2026-02-21 21:05:23] Reading job inputs...
+[2026-02-21 21:05:23] Read 4 jobs from sheet.
+[2026-02-21 21:05:23] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 21:05:24] Sending job to AI for evaluation
+[2026-02-21 21:05:25] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:05:25] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 21:05:25] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:05:26] Job folder ready: 1WQPhzOcIWxr6q36xo-fPJSnIKXofw2y2
+[2026-02-21 21:05:33] Sending application email for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:05:37] Application email sent for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:05:37] Artifacts uploaded and local files cleaned for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:05:39] Application entry appended for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:05:39] culling from input folder https://www.techinnovators.com/careers/software-engineer
+[2026-02-21 21:05:39] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 21:05:40] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 already exists. Skipping...
+[2026-02-21 21:05:40] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 21:05:41] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 already exists. Skipping...
+[2026-02-21 21:05:41] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 21:05:42] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 already exists. Skipping...
+[2026-02-21 21:05:42] === Pipeline Complete ===
+[2026-02-21 21:07:44] === Starting Job Pipeline ===
+[2026-02-21 21:07:44] Initializing project...
+[2026-02-21 21:07:46] Root folder created: 1DGsBXP-d8BO2fMDjW6SpF7bIoHd8k17G
+[2026-02-21 21:07:52] Spreadsheet created: 1Y8jFY1frm0oiO4lCwp7fKni8AGbIt2yqV-5F99_YAkA
+[2026-02-21 21:07:54] Spreadsheet moved to root folder
+[2026-02-21 21:07:54] Reading job inputs...
+[2026-02-21 21:07:54] Read 4 jobs from sheet.
+[2026-02-21 21:07:55] Processing job: Software Engineer @ Tech Innovators Inc. (hash: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848)
+[2026-02-21 21:07:57] Sending job to AI for evaluation
+[2026-02-21 21:07:58] Job appended to sheet: d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:07:58] Job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848 passed evaluation.
+[2026-02-21 21:07:58] Generating artifacts for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:08:00] Job folder ready: 18l4JqldoC0HfpVbi3gKE6sRXOJsm5GSu
+[2026-02-21 21:08:10] Sending application email for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:08:15] Application email sent for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:08:15] Artifacts uploaded and local files cleaned for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:08:16] Application entry appended for job d326683fa71238c6cabf36f5861b963ae51cb2cfb92d3651b9e5b883ee336848
+[2026-02-21 21:08:16] culling from input folder https://www.techinnovators.com/careers/software-engineer
+[2026-02-21 21:08:16] Processing job: Software Engineer2 @ Tech Innovators Inc. (hash: ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2)
+[2026-02-21 21:08:17] Sending job to AI for evaluation
+[2026-02-21 21:08:18] Job appended to sheet: ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:08:18] Job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2 passed evaluation.
+[2026-02-21 21:08:18] Generating artifacts for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:08:19] Job folder ready: 1bX_rfo42K4G106g3c-ab588tkDZw8Gbn
+[2026-02-21 21:08:26] Sending application email for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:08:30] Application email sent for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:08:30] Artifacts uploaded and local files cleaned for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:08:31] Application entry appended for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:08:31] culling from input folder https://www.techinnovators.com/careers/software-engineer
+[2026-02-21 21:08:31] Processing job: Software Engineer3 @ Tech Innovators Inc. (hash: fed64c60ae6cc50bb5587d46dfbac61065318c1f28ba2ea2a603069e66b8457f)
+[2026-02-21 21:08:32] Sending job to AI for evaluation
+[2026-02-21 21:08:33] Job appended to sheet: fed64c60ae6cc50bb5587d46dfbac61065318c1f28ba2ea2a603069e66b8457f
+[2026-02-21 21:08:33] Job fed64c60ae6cc50bb5587d46dfbac61065318c1f28ba2ea2a603069e66b8457f passed evaluation.
+[2026-02-21 21:08:33] Generating artifacts for job fed64c60ae6cc50bb5587d46dfbac61065318c1f28ba2ea2a603069e66b8457f
+[2026-02-21 21:08:34] Job folder ready: 1zzd0sdlzs-8kERWUyAazEdece1bz7wMc
+[2026-02-21 21:08:41] Sending application email for job fed64c60ae6cc50bb5587d46dfbac61065318c1f28ba2ea2a603069e66b8457f
+[2026-02-21 21:08:45] Application email sent for job fed64c60ae6cc50bb5587d46dfbac61065318c1f28ba2ea2a603069e66b8457f
+[2026-02-21 21:08:45] Artifacts uploaded and local files cleaned for job fed64c60ae6cc50bb5587d46dfbac61065318c1f28ba2ea2a603069e66b8457f
+[2026-02-21 21:08:46] Application entry appended for job fed64c60ae6cc50bb5587d46dfbac61065318c1f28ba2ea2a603069e66b8457f
+[2026-02-21 21:08:46] Maximum applications per run reached. Stopping further applications.
+[2026-02-21 21:08:46] === Pipeline Complete ===
+[2026-02-21 21:13:10] === Starting Job Pipeline ===
+[2026-02-21 21:13:10] Initializing project...
+[2026-02-21 21:13:11] Root folder created: 1dbuZSed-djRmV-Zlpv-VB7CeJe_zTE0W
+[2026-02-21 21:13:17] Spreadsheet created: 1GqEXkSCUWF6BM1jdq8TuDvVn6L8fYiPR0WHZZIChIVU
+[2026-02-21 21:13:19] Spreadsheet moved to root folder
+[2026-02-21 21:13:19] Reading job inputs...
+[2026-02-21 21:13:19] Read 4 jobs from sheet.
+[2026-02-21 21:13:19] Processing job: Software Engineer1 @ Tech Innovators Inc. (hash: 56635db7e70a6258230b4cd460d5c1b51d284749b98c82fa04ed83dbec754194)
+[2026-02-21 21:13:20] Sending job to AI for evaluation
+[2026-02-21 21:13:21] Job appended to sheet: 56635db7e70a6258230b4cd460d5c1b51d284749b98c82fa04ed83dbec754194
+[2026-02-21 21:13:21] Job 56635db7e70a6258230b4cd460d5c1b51d284749b98c82fa04ed83dbec754194 passed evaluation.
+[2026-02-21 21:13:21] Generating artifacts for job 56635db7e70a6258230b4cd460d5c1b51d284749b98c82fa04ed83dbec754194
+[2026-02-21 21:13:22] Job folder ready: 1I9zbVJS9XDrS8N1lXyOyqYGZ6DzlC6Rv
+[2026-02-21 21:13:30] Sending application email for job 56635db7e70a6258230b4cd460d5c1b51d284749b98c82fa04ed83dbec754194
+[2026-02-21 21:13:34] Application email sent for job 56635db7e70a6258230b4cd460d5c1b51d284749b98c82fa04ed83dbec754194
+[2026-02-21 21:13:34] Artifacts uploaded and local files cleaned for job 56635db7e70a6258230b4cd460d5c1b51d284749b98c82fa04ed83dbec754194
+[2026-02-21 21:13:35] Application entry appended for job 56635db7e70a6258230b4cd460d5c1b51d284749b98c82fa04ed83dbec754194
+[2026-02-21 21:13:35] culling from input folder https://www.techinnovators.com/careers/software-engineer1
+[2026-02-21 21:13:35] Processing job: Software Engineer2 @ Tech Innovators Inc. (hash: ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2)
+[2026-02-21 21:13:36] Sending job to AI for evaluation
+[2026-02-21 21:13:37] Job appended to sheet: ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:13:37] Job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2 passed evaluation.
+[2026-02-21 21:13:37] Generating artifacts for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:13:38] Job folder ready: 1BfGh2EGRFv03wtqgDSAI-ofQ9penwGXF
+[2026-02-21 21:13:45] Sending application email for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:13:50] Application email sent for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:13:50] Artifacts uploaded and local files cleaned for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:13:52] Application entry appended for job ea7679d503acd2d2bcce71745254e4ed0da8d9d231d9074ce90ebdee5e73c2c2
+[2026-02-21 21:13:52] Maximum applications per run reached. Stopping further applications.
+[2026-02-21 21:13:52] === Pipeline Complete ===

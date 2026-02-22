@@ -1,11 +1,18 @@
 {
-    "spreadsheet_id": "1Ep5mpfrMjA9g9Acuu_7G1t7L97mmPb--rgKJ7SbF6W4",
-    "root_folder_id": "1T8Wl9MwTFGoF5Tr5I_pWWNk5yB-37pBk",
+    "spreadsheet_id": "1GqEXkSCUWF6BM1jdq8TuDvVn6L8fYiPR0WHZZIChIVU",
+    "root_folder_id": "1dbuZSed-djRmV-Zlpv-VB7CeJe_zTE0W",
     "initialized": true,
     "use_cv": "Files/myCV.pdf",
+    "use_evaluation": "Run-Configs/evaluation-prompt.json",
+    "use_generation": "Run-Configs/generation-prompt.json",
     "B_always_initialize": true,
     "B_read_manual_input_mode": true,
+    "B_input_file_culling": true,
+    "B_apply_email": false,
     "B_apply": true,
+    "B_dummy_evaluation_ai": true,
+    "B_dummy_generation_ai": true,
     "B_clean_up": true,
-    "V_min_score": 70
+    "V_min_score": 70,
+    "V_max_applications_per_run": 20
 }

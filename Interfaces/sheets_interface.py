@@ -69,6 +69,7 @@ def create_job_spreadsheet(title):
                 "application_method",
                 "apply_link",
                 "cv_used",
+                "apply_email",
                 "email_sent",
                 "ai_model_used",
                 "job_folder_path",

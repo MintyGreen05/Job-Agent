@@ -1,16 +1,40 @@
 {
-  "inputs": [
-    {
-      "job_title": "Software Engineer",
-      "company": "Tech Innovators Inc.",
-      "job_url": "https://www.techinnovators.com/careers/software-engineer",
-      "job_description": "We are looking for a skilled software engineer to join our team. The ideal candidate will have experience with Python and JavaScript, and a strong understanding of web development.",
-      "location": "berlin, germany",
-      "job_location_type": "On-site",
-      "employment_type": "Part-time",
-      "position": "junior",
-      "pay_per_hour": "Not specified",
-      "source": "indeed"
-      }
-  ]
+    "inputs": [
+        {
+            "job_title": "Software Engineer2",
+            "company": "Tech Innovators Inc.",
+            "job_url": "https://www.techinnovators.com/careers/software-engineer2",
+            "job_description": "We are looking for a skilled software engineer to join our team. The ideal candidate will have experience with Python and JavaScript, and a strong understanding of web development.",
+            "location": "berlin, germany",
+            "job_location_type": "On-site",
+            "employment_type": "Part-time",
+            "position": "junior",
+            "pay_per_hour": "Not specified",
+            "source": "indeed"
+        },
+        {
+            "job_title": "Software Engineer3",
+            "company": "Tech Innovators Inc.",
+            "job_url": "https://www.techinnovators.com/careers/software-engineer3",
+            "job_description": "We are looking for a skilled software engineer to join our team. The ideal candidate will have experience with Python and JavaScript, and a strong understanding of web development.",
+            "location": "berlin, germany",
+            "job_location_type": "On-site",
+            "employment_type": "Part-time",
+            "position": "junior",
+            "pay_per_hour": "Not specified",
+            "source": "indeed"
+        },
+        {
+            "job_title": "Software Engineer4",
+            "company": "Tech Innovators Inc.",
+            "job_url": "https://www.techinnovators.com/careers/software-engineer4",
+            "job_description": "We are looking for a skilled software engineer to join our team. The ideal candidate will have experience with Python and JavaScript, and a strong understanding of web development.",
+            "location": "berlin, germany",
+            "job_location_type": "On-site",
+            "employment_type": "Part-time",
+            "position": "junior",
+            "pay_per_hour": "Not specified",
+            "source": "indeed"
+        }
+    ]
 }

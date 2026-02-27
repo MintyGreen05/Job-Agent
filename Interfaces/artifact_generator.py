@@ -2,7 +2,7 @@ import os
 import shutil
 from reportlab.lib.pagesizes import LETTER
 from reportlab.pdfgen import canvas
-from datetime import datetime
+from datetime import datetime, UTC
 from reportlab.lib.units import inch
 
 
@@ -26,39 +26,56 @@ def _ensure_dir(path):
 # file generators
 # -------------------------
 
+
 def generate_cover_letter_pdf(text, output_path):
     c = canvas.Canvas(output_path, pagesize=LETTER)
     width, height = LETTER
 
-    x = 1 * inch  # 1 inch margin
-    y = height - 1 * inch
-    max_width = width - 2 * inch  # margin on both sides
-    line_height = 14
+    # Smaller margins (0.75 inch instead of 1 inch)
+    margin = 0.75 * inch
+    x = margin
+    y = height - margin
+    max_width = width - 2 * margin
+
+    font_name = "Helvetica"
+    font_size = 13  # slightly bigger text
+    line_height = 16  # increase line spacing
+
+    c.setFont(font_name, font_size)
 
     for paragraph in text.split("\n"):
         words = paragraph.split(" ")
         line = ""
+
         for word in words:
-            # Test if adding the next word exceeds max width
-            if c.stringWidth(line + " " + word, "Helvetica", 12) > max_width:
+            test_line = f"{line} {word}" if line else word
+
+            # Measure width using correct font and size
+            if c.stringWidth(test_line, font_name, font_size) > max_width:
                 c.drawString(x, y, line)
                 y -= line_height
-                if y < 1 * inch:
+
+                if y < margin:
                     c.showPage()
-                    y = height - 1 * inch
+                    c.setFont(font_name, font_size)
+                    y = height - margin
+
                 line = word
             else:
-                if line:
-                    line += " " + word
-                else:
-                    line = word
-        # Draw last line of paragraph
+                line = test_line
+
+        # Draw remaining text in paragraph
         if line:
             c.drawString(x, y, line)
             y -= line_height
-            if y < 1 * inch:
+
+            if y < margin:
                 c.showPage()
-                y = height - 1 * inch
+                c.setFont(font_name, font_size)
+                y = height - margin
+
+        # Add extra spacing between paragraphs
+        y -= line_height * 0.8
 
     c.save()
 
@@ -82,7 +99,7 @@ def generate_job_artifacts(
     """
     Creates local job artifacts and returns paths.
     """
-    timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+    timestamp = datetime.now(UTC).strftime("%Y%m%d%H%M%S")
     folder_name = f"{_safe_name(company_name)} - {_safe_name(job_title)}"
     job_dir = os.path.join(TEMP_ROOT, folder_name)
 
@@ -112,3 +129,14 @@ def cleanup_job_artifacts(job_dir):
     """
     if os.path.exists(job_dir):
         shutil.rmtree(job_dir)
+
+
+if __name__ == "__main__":
+    result = generate_job_artifacts(
+        company_name="Acme Corp",
+        job_title="Software Engineer",
+        cover_letter_text="Dear Hiring Manager,\n\n\n\nI am excited to apply for the Software Engineer position at Acme Corp. With my experience in Python and AI, I believe I would be a great fit for your team.\n\nSincerely,\nJohn Doe",
+        email_text="Subject: Application for Software Engineer Position\n\nDear Hiring Manager,\n\nPlease find attached my cover letter and resume for the Software Engineer position at Acme Corp. I look forward to the opportunity to discuss how I can contribute to your team.\n\nBest regards,\nJohn Doe",
+        message_text="Hi there! Just wanted to share that I've applied for the Software Engineer role at Acme Corp. Fingers crossed!",
+    )
+    

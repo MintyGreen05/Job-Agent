@@ -22,7 +22,7 @@ def create_fresh_json_file(prefix="jobs"):
     Returns the full path of the created file.
     """
     # Fixed folder path
-    folder_path = "Job-Scrapers/files"
+    folder_path = "Job_Scrapers/files"
     
     # Make sure the folder exists
     os.makedirs(folder_path, exist_ok=True)

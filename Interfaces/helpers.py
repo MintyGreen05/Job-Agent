@@ -149,7 +149,7 @@ def remove_from_input_by_url(job_url, json_file_path):
     with open(json_file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
-    print("✅ Job removed and file updated.")
+    print("✅ Job removed from Input list.")
     return True
 
 if __name__ == "__main__":

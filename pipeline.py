@@ -14,7 +14,7 @@ LOG_FILE = "Files/logs.txt"
 if get_field_value("B_read_manual_input_mode", CONFIG_PATH):
     INPUT_JSON_PATH = "Run-Configs/input.json"
 else:
-    INPUT_JSON_PATH = "Job-Scrapers/pending-input.json"
+    INPUT_JSON_PATH = "Job_Scrapers/pending-input.json"
 EVALUATION_PATH = get_field_value("use_evaluation", CONFIG_PATH) or "Run-Configs/evaluation-prompt.json"
 GENERATION_PATH = get_field_value("use_generation", CONFIG_PATH) or "Run-Configs/generation-prompt.json"
 ROOT_FOLDER_NAME = "JobAgent"
@@ -345,19 +345,19 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                     # Append to Applications sheet
                     # ---------------------------
                     app_values = [
-                        job_id,
-                        job.get("job_title", ""),
-                        job.get("company", ""),
-                        "waiting_manual_input",
-                        job.get("date_found", ""),
-                        "AI Generated",
-                        job.get("job_url", ""),
-                        get_field_value("use_cv", CONFIG_PATH),
-                        job.get("email", "N/A"),
-                        email_sent,
-                        ai_model_used2,
-                        job_folder_url,
-                        ""
+                        job_id,                                   # listing_id
+                        job.get("job_title", ""),                 # job_title
+                        job.get("company", ""),                   # company
+                        "waiting_manual_input",                   # application_status
+                        job.get("job_url", ""),                   # apply_link
+                        job_folder_url,                           # job_folder_path
+                        email_sent,                               # email_sent
+                        job.get("email", "N/A"),                  # apply_email
+                        ai_model_used2,                           # ai_model_used
+                        job.get("date_found", ""),                # application_date
+                        get_field_value("use_cv", CONFIG_PATH),   # cv_used
+                        "AI Generated",                           # application_method
+                        ""                                        # notes
                     ]
                     try:
                         append_sheet(spreadsheet_id, APPLICATIONS_SHEET_NAME, app_values)
@@ -395,21 +395,26 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
 
                 
 def main_pipeline():
-    write_log(LOG_FILE, "=== Starting Job Pipeline ===")
-    print("🚀 Starting Job Pipeline...")
+    
 
-    spreadsheet_id, root_folder_id = initialize_project()
-    jobs = read_jobs()
-    if get_field_value("B_run_scrape", CONFIG_PATH):
+
+    run_mode = get_field_value("V_run_mode", CONFIG_PATH)
+    
+    if run_mode == 1 or run_mode == 3:
         from Job_Scrapers.scraper import start
-        start("stepstone")
+        start(get_field_value("S_scrape_mode", CONFIG_PATH))
 
-    cv_text = cv_to_text(get_field_value("use_cv", CONFIG_PATH))
+    if run_mode == 2 or run_mode == 3:
+        write_log(LOG_FILE, "=== Starting Job Pipeline ===")
+        spreadsheet_id, root_folder_id = initialize_project()
+        jobs = read_jobs()
+        cv_text = cv_to_text(get_field_value("use_cv", CONFIG_PATH))
+        process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text)
+        write_log(LOG_FILE, "=== Pipeline Complete ===")
 
-    process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text)
+    
+   
 
-    write_log(LOG_FILE, "=== Pipeline Complete ===")
-    print("🎉 Pipeline Complete.")
 
 # ---------------------------
 # Entry Point

@@ -65,14 +65,14 @@ def create_job_spreadsheet(title):
                 "job_title",
                 "company",
                 "application_status",
-                "application_date",
-                "application_method",
                 "apply_link",
-                "cv_used",
-                "apply_email",
-                "email_sent",
-                "ai_model_used",
                 "job_folder_path",
+                "email_sent",
+                "apply_email",
+                "ai_model_used",
+                "application_date",
+                "cv_used",
+                "application_method",
                 "notes"
             ]
         )

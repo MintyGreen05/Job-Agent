@@ -16,7 +16,7 @@
     "B_dummy_generation_ai": false,
     "B_clean_up": true,
     "V_min_score": 60,
-    "V_max_applications_per_run": 5,
-    "V_run_mode": 1,
+    "V_max_applications_per_run": 10,
+    "V_run_mode": 2,
     "S_scrape_mode": "stepstone"
 }

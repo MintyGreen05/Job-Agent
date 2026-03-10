@@ -8,6 +8,7 @@ from Interfaces.artifact_generator import generate_job_artifacts, cleanup_job_ar
 from Interfaces.ai_client import call_ai
 from Interfaces.helpers import cv_to_text, remove_from_input_by_url, write_log, generate_hash, read_json_text, get_field_value, set_field_value
 from Interfaces.input_reader import read_jobs_from_json, job_object_to_json_text
+from Interfaces.url_to_input import main as url_to_input
 
 CONFIG_PATH = "Run-Configs/config.json"
 LOG_FILE = "Files/logs.txt"
@@ -401,6 +402,9 @@ def main_pipeline():
 
     run_mode = get_field_value("V_run_mode", CONFIG_PATH)
     
+    if get_field_value("B_url_to_input_file", CONFIG_PATH):
+        url_to_input()
+
     if run_mode == 1 or run_mode == 3:
         from Job_Scrapers.scraper import start
         start(get_field_value("S_scrape_mode", CONFIG_PATH))

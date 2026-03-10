@@ -212,6 +212,9 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
 
             evaluation_json = read_json_text(evaluation_json_text) or {}
             job.update(evaluation_json)
+            
+            if job.get("score") is None or job.get("score") == "":
+                continue
 
             # ---------------------------
             # Append evaluation to Listings sheet (safe)

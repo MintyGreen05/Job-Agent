@@ -9,7 +9,7 @@
     "use_generation": "Run-Configs/generation-prompt.json",
     "B_always_initialize": false,
     "B_read_manual_input_mode": true,
-    "B_url_to_input_file": true,
+    "B_url_to_input_file": false,
     "B_input_file_culling": true,
     "B_apply_email": false,
     "B_apply": true,
@@ -18,6 +18,6 @@
     "B_clean_up": true,
     "V_min_score": 60,
     "V_max_applications_per_run": 10,
-    "V_run_mode": 4,
+    "V_run_mode": 2,
     "S_scrape_mode": ["indeed"]
 }

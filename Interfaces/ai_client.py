@@ -20,7 +20,7 @@ MODEL_NAMES = ["gemini-3-flash-preview","gemini-2.5-flash","gemini-2.5-flash-lit
 CURRENT_MODEL_INDEX = 0
 
 
-def call_ai(description: str, prompt: str | None, additional: str, additional2: str,
+def call_ai(description: str, prompt: str | None, additional: str| None, additional2: str| None,
             attempts=2, backoff=1.0) -> str:
     parts = []
 

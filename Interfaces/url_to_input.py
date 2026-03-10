@@ -52,7 +52,7 @@ JSON structure (always return this exact structure):
     "employment_type": "Not specified might be in description",
     "position": "Not specified might be in description",
     "pay_per_hour": "Not specified might be in description",
-    "source": "manual"
+    "source": "url-scrapped"
 }
 
 Rules:
@@ -62,12 +62,17 @@ Rules:
 4. Always return valid JSON.
 5. Do not add extra fields.
 6. Do not include explanations or text outside the JSON.
-7. If the input text contains the full job posting, place it inside "job_description".
-8. If a URL appears in the text, place it in "job_url".
+7. extract the specific job description from the input, and place it inside "job_description".
+8. the job URL will be at the start of the input, place it in "job_url".
 9. If a salary per hour is mentioned, extract only the hourly pay value into "pay_per_hour".
 10. The field "position" should represent the role category (e.g., Internship, Working Student, Full-time, Part-time, Student Job).
+11. The field "employment_type" should represent the type of employment (e.g., part-time, full-time).
+12. The field "job_location_type" should represent the location type (e.g., remote, on-site, hybrid).
+13. The fields "job_title", "company", "location", "job_url", "job_description" must be filled in the output.
 
 Output requirements:
+- Preserve paragraphs and bullet points in the job description exactly as they appear.
+- Do NOT summarize responsibilities, qualifications, or overview text.
 - Return ONLY the JSON object.
 - Keep the exact same keys and order.
 - Do not include markdown formatting.
@@ -92,20 +97,28 @@ def write_urls(path: str, urls: List[str]) -> None:
 
 def ensure_output_file(path: str) -> None:
     if not os.path.exists(path):
+        # initialize with "inputs" array
         with open(path, "w", encoding="utf-8") as f:
-            json.dump({"input": []}, f, ensure_ascii=False, indent=2)
+            json.dump({"inputs": []}, f, ensure_ascii=False, indent=2)
 
 def append_to_output(path: str, obj: Dict[str, Any]) -> None:
     ensure_output_file(path)
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
-    if "input" not in data or not isinstance(data["input"], list):
-        data["input"] = []
-    data["input"].append(obj)
+    # ensure "inputs" exists and is a list
+    if "inputs" not in data or not isinstance(data["inputs"], list):
+        data["inputs"] = []
+
+    # if obj is a list of jobs, extend the array, else append single dict
+    if isinstance(obj, list):
+        data["inputs"].extend(obj)
+    else:
+        data["inputs"].append(obj)
+
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-def setup_driver(headless: bool = False) -> webdriver.Chrome:
+def setup_driver(headless: bool = True) -> webdriver.Chrome:
     chrome_options = Options()
     if headless:
         # newer chrome may need "--headless=new"; try both if one doesn't work
@@ -165,7 +178,14 @@ def main():
                 combined = f"{url}\n\n{text}"
 
                 # call the AI (user replaces call_ai with real integration)
-                ai_result = call_ai(combined, prompt)
+                ai_result,ai_model = call_ai(combined, prompt, "","")
+                print(ai_result)
+
+                if isinstance(ai_result, str):
+                    try:
+                        ai_result = json.loads(ai_result)
+                    except json.JSONDecodeError as e:
+                        raise ValueError(f"AI did not return valid JSON: {e}")
 
                 if not isinstance(ai_result, dict):
                     raise ValueError("AI did not return a JSON/dict object.")

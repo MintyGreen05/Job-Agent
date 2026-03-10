@@ -1,5 +1,6 @@
 import time
 import random
+import traceback
 from bs4 import BeautifulSoup
 import requests
 import json
@@ -22,8 +23,28 @@ generate_files = get_field_value("B_generate_files", "Job_Scrapers/indeed/config
 do_one = get_field_value("B_do_just_one", "Job_Scrapers/indeed/configs.json")
 
 
-def get_soup_from_url(url,driver):
-    
+def get_soup_from_url(url):
+
+    options = Options()
+
+    # Do NOT use old --headless (more detectable)
+    #options.add_argument("--headless=new")
+
+    # Remove obvious automation flags
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("--start-minimized")
+
+    # Realistic user agent
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    )
+
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()),
+        options=options
+    )
 
     try:
         driver.get(url)
@@ -38,10 +59,12 @@ def get_soup_from_url(url,driver):
         html = driver.page_source
         print(f"Fetched (Selenium) URL: {url}")
 
+        driver.quit()
         return BeautifulSoup(html, "html.parser")
 
     except Exception as e:
         print(f"Error fetching URL with Selenium: {e}")
+        driver.quit()
         return None
 
 def get_next_from_soup(soup):
@@ -58,28 +81,25 @@ def get_job_urls_from_soup(soup):
     """
     listings = [
     a for a in soup.find_all("a", attrs={"data-jk": True})
-    if a.get("href", "").startswith("/rc/clk?")
+    if a.get("href", "").startswith(("/rc/clk?", "/pagead/clk?"))
     ]
 
     urls = []
+
     for listing in listings:
-        href = listing.get("href")
-        parsed = urlparse(href)
-        query = parse_qs(parsed.query)
-        job_key = query.get("jk", [None])[0]
-        if href:
+        job_key = listing.get("data-jk")
+        if job_key:
             urls.append(f"https://de.indeed.com/viewjob?jk={job_key}")
 
     print(f"Found {len(urls)} job URLs on page.")
     return urls
 
-def scrape_job_detail_page(job_url,driver):
-    
-
+def scrape_job_detail_page(job_url):
+  
     """
     Open job page and extract full details.
     """
-    soup = get_soup_from_url(job_url,driver)
+    soup = get_soup_from_url(job_url)
     if generate_files:
         write_str_to_txt_file(soup.prettify(), f"Job_Scrapers/files/job_detail_{int(time.time())}.txt")
     try:
@@ -110,11 +130,11 @@ def scrape_job_detail_page(job_url,driver):
             description = desc_tag.get_text(separator="\n", strip=True)
 
 
+        salary_div = soup.find("div", attrs={"id": "salaryInfoAndJobType"})
+
         employment_type = (
-            soup.find("div", attrs={"id": "salaryInfoAndJobType"})
-                .find_all("span")[1]
-                .get_text(strip=True)
-            if soup.find("div", attrs={"id": "salaryInfoAndJobType"})
+            salary_div.find_all("span")[1].get_text(strip=True)
+            if salary_div and len(salary_div.find_all("span")) > 1
             else "Not specified might be in description"
         )
 
@@ -150,37 +170,24 @@ def scrape_job_detail_page(job_url,driver):
             "pay_per_hour": pay_per_hour,
             "source": "indeed"
         }
+        #print(job_data)
 
         print(f"Scraped: {title}")
+  
         return job_data
-
+        
     except Exception as e:
         print(f"Failed scraping {job_url}: {e}")
+        traceback.print_exc()
+
         return None
+
+    
 
 
 def process_job_listings():
 
-    options = Options()
-
-    # Do NOT use old --headless (more detectable)
-    #options.add_argument("--headless=new")
-
-    # Remove obvious automation flags
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_argument("--start-maximized")
-
-    # Realistic user agent
-    options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/120.0.0.0 Safari/537.36"
-    )
-
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()),
-        options=options
-    )
+    
 
     max_pages = get_field_value(
         "V_number_of_pages",
@@ -201,7 +208,7 @@ def process_job_listings():
 
     while current_url and (not max_pages or pages_scraped < max_pages):
 
-        soup = get_soup_from_url(current_url,driver)
+        soup = get_soup_from_url(current_url)
         write_str_to_txt_file(soup.prettify(), f"Job_Scrapers/files/page_{pages_scraped}_{int(time.time())}.txt")
         job_urls = get_job_urls_from_soup(soup)
 
@@ -214,7 +221,7 @@ def process_job_listings():
 
             try:
                 # Only now scrape detail page
-                job_data = scrape_job_detail_page(job_url,driver)
+                job_data = scrape_job_detail_page(job_url)
 
                 if job_data and job_data["job_title"] != "Not specified" and job_data["company"] != "Not specified":
                     all_new_jobs.append(job_data)
@@ -237,7 +244,6 @@ def process_job_listings():
         print("No new jobs found.")
         return
     
-    driver.quit()
 
     fresh_file = create_fresh_json_file()
     print(f"Created fresh file: {fresh_file}")

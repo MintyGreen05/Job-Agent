@@ -16,7 +16,7 @@ api_key = os.environ["AI_API_KEY"]
 
 client = genai.Client(api_key=api_key)
 
-MODEL_NAMES = ["gemini-2.5-flash","gemini-3-flash-preview","gemini-2.5-flash-lite"]
+MODEL_NAMES = ["gemini-3-flash-preview","gemini-2.5-flash","gemini-2.5-flash-lite"]
 CURRENT_MODEL_INDEX = 0
 
 

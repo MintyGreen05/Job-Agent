@@ -64,6 +64,7 @@ def create_job_spreadsheet(title):
                 "listing_id",
                 "job_title",
                 "company",
+                "score",
                 "application_status",
                 "apply_link",
                 "job_folder_path",

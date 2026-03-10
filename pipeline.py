@@ -348,6 +348,7 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                         job_id,                                   # listing_id
                         job.get("job_title", ""),                 # job_title
                         job.get("company", ""),                   # company
+                        job.get("score", ""),                     # score
                         "waiting_manual_input",                   # application_status
                         job.get("job_url", ""),                   # apply_link
                         job_folder_url,                           # job_folder_path

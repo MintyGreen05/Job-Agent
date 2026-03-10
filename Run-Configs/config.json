@@ -18,5 +18,5 @@
     "V_min_score": 60,
     "V_max_applications_per_run": 10,
     "V_run_mode": 2,
-    "S_scrape_mode": "stepstone"
+    "S_scrape_mode": ["indeed"]
 }

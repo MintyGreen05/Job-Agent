@@ -4,9 +4,9 @@ from Job_Scrapers.indeed.indeed import process_job_listings as indeed_process_li
 from Job_Scrapers.helper import get_field_value
 
 def start(source):
-    if source == "stepstone":
+    if "stepstone" in source:
         stepstone_process_listings()
-    elif source == "indeed":
+    if "indeed" in source:
         indeed_process_listings()
     else:
         print(f"❌ Unknown source: {source}")

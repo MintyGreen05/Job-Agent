@@ -63,7 +63,7 @@ Rules:
 5. Do not add extra fields.
 6. Do not include explanations or text outside the JSON.
 7. extract the specific job description from the input, and place it inside "job_description".
-8. the job URL will be at the start of the input, place it in "job_url".
+8. the job URL will be at the start of the input, place it in "job_url", and it must be only in text format and not a href link.
 9. If a salary per hour is mentioned, extract only the hourly pay value into "pay_per_hour".
 10. The field "position" should represent the role category (e.g., Internship, Working Student, Full-time, Part-time, Student Job).
 11. The field "employment_type" should represent the type of employment (e.g., part-time, full-time).

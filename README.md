@@ -10,12 +10,18 @@ This is a personal assistant that evaluates and generates files to streamline th
 - **Collects job offers** from the specified job boards into a JSON file and can also extract data from given URL links.  
 - **Automatically creates a folder** on your Google Drive with a Google Sheet to store all applications.  
 - **Evaluates the entries** from the JSON file using LLMs, comparing them against personal requirements and the user’s CV (please use a clear CV).  
-- **Assigns a pass or fail grade.** For passed applications, it logs the result in a tab of the Google Sheet and generates:  
+- **Assigns a pass or fail grade.** For passed applications, it logs the result in a tab of the Google Sheet and generates personalized:  
   - Cover letter  
-  - Email  
-  - Message personalized with your information and the job posting data  
+  - Email (Which can be automatically sent without user input)
+  - Message
   *(You can choose to use the AI-generated versions or write them yourself.)*  
 - **Organizes everything** in the Google Sheet with links for easy navigation and quick application submission.
+
+
+## Here are screenshots of what you might expect you google sheets to look like after a automated run
+
+![](Screenshots/GoogleSheet1.jpeg)
+![](Screenshots/GoogleSheet2.jpeg)
 
 
 ## Architecture

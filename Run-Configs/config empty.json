@@ -1,9 +1,9 @@
 {
-    "spreadsheet_id": "19BstMUtRaI0n63KPSkNRBzJpeLKKpJ4fD1_Y7a08C0s",
-    "root_folder_id": "1x_xsWfBgHqZViz8SF_MJ2gJBDFqe6Xy9",
-    "spreadsheet_id_Bup": "19BstMUtRaI0n63KPSkNRBzJpeLKKpJ4fD1_Y7a08C0s",
-    "root_folder_id_Bup": "1x_xsWfBgHqZViz8SF_MJ2gJBDFqe6Xy9",
-    "initialized": true,
+    "spreadsheet_id": "empty",
+    "root_folder_id": "empty",
+    "spreadsheet_id_Bup": "empty",
+    "root_folder_id_Bup": "empty",
+    "initialized": false,
     "use_cv": "Files/myCV.pdf",
     "use_evaluation": "Run-Configs/evaluation-prompt.json",
     "use_generation": "Run-Configs/generation-prompt.json",
@@ -19,5 +19,5 @@
     "V_min_score": 60,
     "V_max_applications_per_run": 10,
     "V_run_mode": 2,
-    "S_scrape_mode": ["stepstone"]
+    "S_scrape_mode": ["stepstone","indeed"]
 }

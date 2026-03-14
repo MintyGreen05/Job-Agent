@@ -185,7 +185,8 @@ def process_job_listings():
     while current_url and (not max_pages or pages_scraped < max_pages):
 
         soup = get_soup_from_url(current_url,driver)
-        write_str_to_txt_file(soup.prettify(), f"Job_Scrapers/files/page_{pages_scraped}_{int(time.time())}.txt")
+        if generate_files:
+            write_str_to_txt_file(soup.prettify(), f"Job_Scrapers/files/page_{pages_scraped}_{int(time.time())}.txt")
         job_urls = get_job_urls_from_soup(soup)
 
         for job_url in job_urls:

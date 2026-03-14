@@ -1,9 +1,0 @@
-https://apply.careers.microsoft.com/careers?domain=microsoft.com&start=0&location=Berlin%2C++BE%2C++Germany&pid=1970393556626469&sort_by=distance&filter_distance=160&filter_include_remote=1
-https://apply.careers.microsoft.com/careers?domain=microsoft.com&start=0&location=Berlin%2C++BE%2C++Germany&pid=1970393556824056&sort_by=distance&filter_distance=160&filter_include_remote=1
-https://apply.careers.microsoft.com/careers?domain=microsoft.com&start=0&location=Berlin%2C++BE%2C++Germany&pid=1970393556750318&sort_by=distance&filter_distance=160&filter_include_remote=1
-https://careers.ibm.com/en_US/careers/JobDetail?jobId=98990&source=WEB_Search_NA
-https://careers.cisco.com/global/en/job/2008619/Incubator-Learning-Programme
-https://n26.com/en-eu/careers/positions/7656921
-https://n26.com/en-eu/careers/positions/7686804
-https://n26.com/en-eu/careers/positions/7668223
-https://n26.com/en-eu/careers/positions/7546709

@@ -2,3 +2,7 @@
 /Tokens/credentials.json
 /Tokens/.env
 /Files
+/Run-Configs/config.json
+/Run-Configs/evaluation-prompt.json
+/Run-Configs/generation-prompt.json
+/Job_Scrapers/master-input.json

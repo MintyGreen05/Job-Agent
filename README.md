@@ -27,9 +27,9 @@ This is a personal assistant that evaluates and generates files to streamline th
 ## Architecture
 
 - **Job Collection:**  
-  - Manual Input JSON  
-  - URL to Input  
-  - Automatically collected Input  
+  - Manual Input JSON (used in case of manual job inputs)  
+  - URL to Input (used in case user wishes to feed the program direct urls instead of automated website searches)  
+  - Automatically collected Input (used in case user wishes for the program to automatically scan job boards of specified websites)
 
 - **Evaluation and generation:**  
   - Evaluates collected job postings  

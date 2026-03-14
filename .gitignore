@@ -1,3 +1,5 @@
+venv/
+.venv/
 /Tokens/token.json
 /Tokens/credentials.json
 /Tokens/.env

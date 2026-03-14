@@ -18,7 +18,7 @@ This is a personal assistant that evaluates and generates files to streamline th
 - **Organizes everything** in the Google Sheet with links for easy navigation and quick application submission.
 
 
-## Here are screenshots of what you might expect you google sheets to look like after a automated run
+## Here are screenshots of what you might expect your google sheet file to look like after a automated run
 
 ![](Screenshots/GoogleSheet1.jpeg)
 ![](Screenshots/GoogleSheet2.jpeg)

@@ -16,12 +16,21 @@ api_key = os.environ["AI_API_KEY"]
 
 client = genai.Client(api_key=api_key)
 
-MODEL_NAMES = ["gemini-3-flash-preview","gemini-2.5-flash","gemini-2.5-flash-lite"]
+MODEL_NAMES = ["gemini-3-flash-preview","gemini-2.5-flash"]
+#,"gemini-2.5-flash-lite"
 CURRENT_MODEL_INDEX = 0
 
 
-def call_ai(description: str, prompt: str | None, additional: str| None, additional2: str| None,
-            attempts=2, backoff=1.0) -> str:
+def call_ai(
+    description: str,
+    prompt: str | None,
+    additional: str | None,
+    additional2: str | None,
+    preferred_model: str | None = None,
+    attempts=2,
+    backoff=1.0
+) -> tuple[str, str]:
+
     parts = []
 
     if prompt:
@@ -37,17 +46,31 @@ def call_ai(description: str, prompt: str | None, additional: str| None, additio
 
     full_prompt = "\n\n".join(parts)
 
+    # Build model order
+    models_to_try = []
 
-    
-    for attempt in range(len(MODEL_NAMES)): 
-        try: 
-            print(f"###Attempting AI call with model {MODEL_NAMES[CURRENT_MODEL_INDEX]}")
-            response = client.models.generate_content( model=MODEL_NAMES[CURRENT_MODEL_INDEX], contents=full_prompt ) 
-            print(f"###AI call successful with model {MODEL_NAMES[CURRENT_MODEL_INDEX]}")
-            return response.text,MODEL_NAMES[CURRENT_MODEL_INDEX]
-        except Exception as e:  
-            print(f"AI call failed on model {MODEL_NAMES[CURRENT_MODEL_INDEX]}: {e}")
-            next_model() 
+    if preferred_model:
+        models_to_try.append(preferred_model)
+
+    models_to_try.extend(MODEL_NAMES)
+
+    # Remove duplicates while keeping order
+    models_to_try = list(dict.fromkeys(models_to_try))
+
+    for model in models_to_try:
+        try:
+            print(f"###Attempting AI call with model {model}")
+            response = client.models.generate_content(
+                model=model,
+                contents=full_prompt
+            )
+            print(f"###AI call successful with model {model}")
+            return response.text, model
+
+        except Exception as e:
+            print(f"AI call failed on model {model}: {e}")
+
+    raise RuntimeError("All models failed")
             
 
 def call_ai_batch(

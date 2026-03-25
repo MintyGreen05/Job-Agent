@@ -31,7 +31,7 @@ from Interfaces.ai_client import call_ai
 # -----------------------
 URLS_FILE = "Run-Configs/urls.txt"
 OUTPUT_FILE = "Run-Configs/input.json"
-HEADLESS = True         # set False for visible browser for debugging
+HEADLESS = False         # set False for visible browser for debugging
 PAGE_LOAD_WAIT = 2      # seconds to wait after .get() (increase if slow sites)
 SCROLL_PAUSE = 1        # pause between scrolls
 MAX_SCROLLS = 6         # how many times to scroll to try to load lazy content
@@ -118,13 +118,19 @@ def append_to_output(path: str, obj: Dict[str, Any]) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-def setup_driver(headless: bool = True) -> webdriver.Chrome:
+def setup_driver(headless: bool = False) -> webdriver.Chrome:
     chrome_options = Options()
     if headless:
         # newer chrome may need "--headless=new"; try both if one doesn't work
         chrome_options.add_argument("--headless=new")
+    chrome_options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    )
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--start-minimized")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1200,800")
     # optional: avoid loading images (speeds up) - uncomment if desired:
@@ -167,18 +173,19 @@ def main():
 
     ensure_output_file(OUTPUT_FILE)
 
-    driver = setup_driver(HEADLESS)
+    
     try:
         remaining_urls = list(urls)  # will mutate when a URL succeeds
         for url in list(urls):  # iterate over original snapshot
             print(f"\nProcessing: {url}")
             try:
+                driver = setup_driver(HEADLESS)
                 text = get_visible_text_from_url(driver, url)
+                driver.quit()
                 # per your spec: url appended to the text at the start
                 combined = f"{url}\n\n{text}"
 
-                # call the AI (user replaces call_ai with real integration)
-                ai_result,ai_model = call_ai(combined, prompt, "","")
+                ai_result,ai_model = call_ai(combined, prompt, "","",preferred_model="gemini-2.5-flash")
                 print(ai_result)
 
                 if isinstance(ai_result, str):
@@ -207,11 +214,9 @@ def main():
                 print(f"Failed to process {url}: {e}")
                 traceback.print_exc()
                 # do NOT remove URL on failure; move to next
-    finally:
-        try:
-            driver.quit()
-        except Exception:
-            pass
+    except Exception as e:
+        print(f"Unexpected error in main loop: {e}")
+        traceback.print_exc()   
 
     print("\nDone.")
 

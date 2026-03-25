@@ -202,7 +202,8 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                         description=eval_prompt,
                         prompt=use_evaluation_prompt,
                         additional = use_evaluation_requirements,
-                        additional2 = cv_text
+                        additional2 = cv_text,
+                        preferred_model="gemini-2.5-flash"
                     )
                 except Exception as e:
                     evaluation_json_text = "{}"
@@ -291,6 +292,7 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                                 description=job_object_to_json_text(job),
                                 additional = cv_text,
                                 additional2=""
+                                ,preferred_model="gemini-3-flash-preview"
                             )
                         except Exception as e:
                             artifact_json_text = "{}"

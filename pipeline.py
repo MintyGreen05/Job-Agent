@@ -320,8 +320,8 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
 
                     # Upload artifacts
                     for name, path in artifacts.get("files", {}).items():
-                        mimetype = "application/pdf" if name == "cover_letter" else "text/plain"
-                        upload_job_file(job_folder_id, path, f"{name}.{'pdf' if name=='cover_letter' else 'txt'}", mimetype)
+                        mimetype = "application/pdf" if "cover_letter" in name else "text/plain"
+                        upload_job_file(job_folder_id, path, f"{name}.{'pdf' if 'cover_letter' in name else 'txt'}", mimetype)
 
                     email_sent = False
                     if apply_email and (job.get("email", "") not in ["", "N/A"]):

@@ -105,9 +105,9 @@ def generate_job_artifacts(
 
     _ensure_dir(job_dir)
 
-    cover_letter_path = os.path.join(job_dir, "Cover_Letter.pdf")
-    email_path = os.path.join(job_dir, "Email.txt")
-    message_path = os.path.join(job_dir, "Message.txt")
+    cover_letter_path = os.path.join(job_dir, f"Cover_Letter_{_safe_name(company_name)}.pdf")
+    email_path = os.path.join(job_dir, f"Email_{_safe_name(company_name)}.txt")
+    message_path = os.path.join(job_dir, f"Message_{_safe_name(company_name)}.txt")
 
     generate_cover_letter_pdf(cover_letter_text, cover_letter_path)
     generate_text_file(email_text, email_path)
@@ -116,9 +116,9 @@ def generate_job_artifacts(
     return {
         "job_dir": job_dir,
         "files": {
-            "cover_letter": cover_letter_path,
-            "email": email_path,
-            "message": message_path,
+            f"cover_letter_{_safe_name(company_name)}": cover_letter_path,
+            f"email_{_safe_name(company_name)}": email_path,
+            f"message_{_safe_name(company_name)}": message_path,
         },
     }
 

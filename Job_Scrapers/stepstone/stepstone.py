@@ -226,7 +226,13 @@ def process_job_listings():
     fresh_file = create_fresh_json_file()
     print(f"Created fresh file: {fresh_file}")
     append_to_json_list(fresh_file, all_new_jobs)
-    append_to_json_list("Job_Scrapers/master-input.json", all_new_jobs)
+    append_to_json_list(
+    "Job_Scrapers/master-input.json",
+    [
+        {"job_url": job["job_url"], "job_title": job["job_title"]}
+        for job in all_new_jobs
+    ]
+)   
     append_to_json_list("Job_Scrapers/pending-input.json", all_new_jobs)
 
     print(f"Saved {len(all_new_jobs)} new jobs.")

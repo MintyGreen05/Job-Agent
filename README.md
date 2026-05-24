@@ -23,6 +23,24 @@ This is a personal assistant that evaluates and generates files to streamline th
 ![](Screenshots/GoogleSheet1.jpeg)
 ![](Screenshots/GoogleSheet2.jpeg)
 
+## Built With
+ 
+- **Google Cloud Projects** — access to Google services
+- **Google AI Studio (Gemini)** — AI evaluation and generation
+- **Python** — scraping, navigation, and workflow logic
+## How It Works
+ 
+1. **Configuration** — reads user-defined config files to set run specifications and preferences
+2. **Job Collection** — scrapes postings from LinkedIn, Indeed, and Stepstone by parsing HTML data and navigating pages via Python; LinkedIn postings are fetched through a third-party service
+3. **Deduplication** — collects all postings and their data into a JSON file, removing duplicates and previously seen listings
+4. **Evaluation** — Gemini 2.5 scores each posting against user-defined criteria and provides reasoning for each score
+5. **Google Sheets Export** — results are written to a Google Sheet created automatically on initialization in the user's Drive
+6. **Generation** — for postings that pass the score threshold, Gemini generates a tailored cover letter, email, and message based on the user's CV, job description, and requirements; generated files are uploaded to a named folder in the user's Drive
+7. **Application Sheet** — a second Google Sheet is populated with organized fields, URL links to job postings, and links to generated folders for fast, efficient applying
+8. **Cleanup** — temporary files generated during the run that are no longer needed are removed automatically
+## Note
+ 
+The program does not apply to jobs directly. Each job requires different data submitted on different domains, making full automation of the application step not feasible.
 
 ## Architecture
 

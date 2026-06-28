@@ -40,7 +40,7 @@ prompt = """You are an information extraction system.
 
 Your task is to read the provided job-related text and extract structured information into the following JSON format.
 
-JSON structure (always return this exact structure):
+JSON structure (YOU MUST RETURN EXACTLY THIS STRUCTURE IN VALID JSON):
 
 {
     "job_title": "Not specified might be in description",
@@ -121,7 +121,6 @@ def append_to_output(path: str, obj: Dict[str, Any]) -> None:
 def setup_driver(headless: bool = False) -> webdriver.Chrome:
     chrome_options = Options()
     if headless:
-        # newer chrome may need "--headless=new"; try both if one doesn't work
         chrome_options.add_argument("--headless=new")
     chrome_options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -130,16 +129,16 @@ def setup_driver(headless: bool = False) -> webdriver.Chrome:
     )
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--start-minimized")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1200,800")
-    # optional: avoid loading images (speeds up) - uncomment if desired:
-    # prefs = {"profile.managed_default_content_settings.images": 2}
-    # chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_argument("--window-position=-2000,0")  # ← added
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    
+    if not headless:
+        driver.set_window_position(-2000, 0)  # ← added
+    
     return driver
-
 def get_visible_text_from_url(driver: webdriver.Chrome, url: str) -> str:
     driver.get(url)
     # basic wait for JS to run; increase if needed
@@ -186,6 +185,15 @@ def main():
                 combined = f"{url}\n\n{text}"
 
                 ai_result,ai_model = call_ai(combined, prompt, "","",preferred_model="gemini-2.5-flash")
+                
+                if ai_result.strip().startswith("```"):
+                    ai_result = ai_result.strip()
+                    # Remove first line (```json or ```)
+                    ai_result = ai_result.split('\n', 1)[1]
+                    # Remove last line (```)
+                    ai_result = ai_result.rsplit('\n', 1)[0]
+
+
                 print(ai_result)
 
                 if isinstance(ai_result, str):

@@ -1,6 +1,6 @@
 {
     "V_number_of_pages": 1,
-    "start_link": "https://de.indeed.com/jobs?q=Werkstudent+it&l=Berlin&sort=date&vjk=ae5a542f844db3a7",
+    "start_link": "https://de.indeed.com/jobs?q=Werkstudent+it&l=Berlin&radius=35&sort=date&from=searchOnDesktopSerp&start=10",
     "B_do_just_one": false,
     "B_generate_files": false
 }

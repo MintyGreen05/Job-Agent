@@ -38,8 +38,8 @@ def generate_cover_letter_pdf(text, output_path):
     max_width = width - 2 * margin
 
     font_name = "Helvetica"
-    font_size = 13  # slightly bigger text
-    line_height = 16  # increase line spacing
+    font_size = 10  # slightly bigger text
+    line_height = 13  # increase line spacing
 
     c.setFont(font_name, font_size)
 

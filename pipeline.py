@@ -139,6 +139,7 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
             print(f"🔹 Processing job: {title} @ {company}")
 
             culled = False  # track if we've already culled this job (avoid double culling)
+            safe_to_cull = False  # ADD THIS
 
             # Check if job hash exists in Listings
             try:
@@ -254,15 +255,20 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                 print(f"❌ Failed to append job to Listings: {e}")
 
             # If append succeeded and culling enabled, attempt to cull now
-            if culling_enabled and append_success and job_url:
+            # Only cull now if this job won't go through generation
+            # If it will, we wait until Applications sheet append succeeds
+            will_generate = apply_enabled and job.get("score", 0) >= min_score
+            if culling_enabled and append_success and job_url and not will_generate:
                 try:
                     removed = remove_from_input_by_url(job_url, INPUT_JSON_PATH)
                     write_log(LOG_FILE, f"Culling after append for {job_url}: removed={removed}")
                     culled = culled or bool(removed)
+                    safe_to_cull = True
                 except Exception as e:
                     write_log(LOG_FILE, f"❌ Failed to cull after append for {job_url}: {e}")
                     print(f"❌ Failed to cull after append: {e}")
-
+            elif not will_generate:
+                safe_to_cull = True  # no culling needed but not blocked by generation
             # ---------------------------
             # Generate Artifacts if evaluation passed
             # ---------------------------
@@ -370,9 +376,20 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                         append_sheet(spreadsheet_id, APPLICATIONS_SHEET_NAME, app_values)
                         write_log(LOG_FILE, f"Application entry appended for job {job_id}")
                         print(f"📄 Application entry appended to Applications sheet.")
+                        # Only cull AFTER full pipeline success — this is the safe point
+                        safe_to_cull = True
+                        if culling_enabled and job_url:
+                            try:
+                                removed = remove_from_input_by_url(job_url, INPUT_JSON_PATH)
+                                write_log(LOG_FILE, f"Culling after Applications append for {job_url}: removed={removed}")
+                                culled = culled or bool(removed)
+                            except Exception as e:
+                                write_log(LOG_FILE, f"❌ Failed to cull after Applications append for {job_url}: {e}")
+                                print(f"❌ Failed to cull after Applications append: {e}")
                     except Exception as e:
                         write_log(LOG_FILE, f"❌ Failed to append application entry for job {job_id}: {e}")
                         print(f"❌ Failed to append to Applications sheet: {e}")
+                    
 
                     applications_made += 1
                     if applications_made >= max_apps_per_run:
@@ -384,13 +401,15 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                     print(f"⚠️ Job {job.get('job_title','<no title>')} failed evaluation. Skipping artifacts.")
 
             # Final culling attempt: if not culled yet and culling enabled, try culling now
-            if culling_enabled and not culled and job_url:
+           # Only cull here if the full pipeline completed safely
+            # If safe_to_cull is False, the job failed mid-generation and should be retried next run
+            if culling_enabled and not culled and job_url and safe_to_cull:
                 try:
                     removed = remove_from_input_by_url(job_url, INPUT_JSON_PATH)
                     write_log(LOG_FILE, f"Final culling attempt for {job_url}: removed={removed}")
                 except Exception as e:
                     write_log(LOG_FILE, f"❌ Final culling attempt failed for {job_url}: {e}")
-                    print(f"❌ Final culling attempt failed: {e}") 
+                    print(f"❌ Final culling attempt failed: {e}")
                     
         except Exception as e:
             write_log(

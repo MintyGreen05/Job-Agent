@@ -26,16 +26,9 @@ do_one = get_field_value("B_do_just_one", "Job_Scrapers/indeed/configs.json")
 def get_soup_from_url(url):
 
     options = Options()
-
-    # Do NOT use old --headless (more detectable)
-    #options.add_argument("--headless=new")
-
-    # Remove obvious automation flags
     options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_argument("--start-minimized")
-    options.add_argument("--window-position=-2000,0")
+    options.add_argument("--window-position=-2000,0")  # off-screen, does the job
     options.add_argument("--window-size=800,600")
-    # Realistic user agent
     options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -46,14 +39,13 @@ def get_soup_from_url(url):
         service=Service(ChromeDriverManager().install()),
         options=options
     )
-    driver.minimize_window()
+    # Removed driver.minimize_window() — off-screen position is enough
+    # and minimize can cause rendering issues on JS-heavy pages
     try:
         driver.get(url)
+        driver.set_window_position(-2000, 0)  # reinforce after page load in case Chrome refocused
 
-        # Random human-like delay
         time.sleep(random.uniform(3, 6))
-
-        # Scroll a bit (simulate user)
         driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight/{random.uniform(2, 3)});")
         time.sleep(random.uniform(1, 3))
 

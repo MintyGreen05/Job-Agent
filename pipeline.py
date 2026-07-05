@@ -2,13 +2,15 @@
 
 import datetime
 import json
+import os
 from Interfaces.sheets_interface import append_sheet, read_sheet, update, get_sheet_id_by_name, get_service
 from Interfaces.drive_interface import create_root_folder, create_job_folder, upload_job_file, move_file_to_folder
-from Interfaces.artifact_generator import generate_job_artifacts, cleanup_job_artifacts
+from Interfaces.artifact_generator import generate_resume_pdf, ENABLE_RESUME_GENERATION,generate_job_artifacts, cleanup_job_artifacts
 from Interfaces.ai_client import call_ai
 from Interfaces.helpers import cv_to_text, remove_from_input_by_url, write_log, generate_hash, read_json_text, get_field_value, set_field_value
 from Interfaces.input_reader import read_jobs_from_json, job_object_to_json_text
 from Interfaces.url_to_input import main as url_to_input
+from Interfaces.resume_generator import generate_and_insert_project
 
 CONFIG_PATH = "Run-Configs/config.json"
 LOG_FILE = "Files/logs.txt"
@@ -18,6 +20,7 @@ else:
     INPUT_JSON_PATH = "Job_Scrapers/pending-input.json"
 EVALUATION_PATH = get_field_value("use_evaluation", CONFIG_PATH) or "Run-Configs/evaluation-prompt.json"
 GENERATION_PATH = get_field_value("use_generation", CONFIG_PATH) or "Run-Configs/generation-prompt.json"
+CV_PROMPT_PATH = get_field_value("use_cv_prompt", CONFIG_PATH) or "Run-Configs/cv-prompt.json"
 ROOT_FOLDER_NAME = "JobAgent"
 LISTINGS_SHEET_NAME = "Listings"
 APPLICATIONS_SHEET_NAME = "Applications"
@@ -109,6 +112,8 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
     use_evaluation_prompt = get_field_value("prompt", EVALUATION_PATH)
     use_evaluation_requirements = get_field_value("requirements", EVALUATION_PATH)
     use_generation_prompt = get_field_value("prompt", GENERATION_PATH)
+    use_cv_prompt = get_field_value("prompt", CV_PROMPT_PATH)
+    resume_template_path = get_field_value("resume_template_path", CONFIG_PATH)
 
     applications_made = 0
 
@@ -148,7 +153,8 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                 already_exists = False
                 write_log(LOG_FILE, f"❌ id_exists check failed for {job_id}: {e}")
                 print(f"❌ id_exists check failed: {e}")
-
+            if get_field_value("B_dont_skip", CONFIG_PATH):
+                already_exists = False  # override to force processing
             if already_exists:
                 write_log(LOG_FILE, f"Job {job_id} already exists. Skipping...")
                 print("⚠️ Job already exists. Skipping.")
@@ -311,23 +317,68 @@ def process_jobs(jobs, spreadsheet_id, root_folder_id, cv_text):
                     # Ensure email has subject at start
                     email_text = f"Subject: {artifact_json.get('email_subject','')}\n\n{artifact_json.get('email','')}"
 
+                    all_files = {}
+                    job_dir = None
+
+                    if ENABLE_RESUME_GENERATION:
+                        write_log(LOG_FILE, "Resume generation enabled, building resume PDF")
+
+                        safe_company = "_".join("".join(c for c in job.get("company", "") if c.isalnum() or c in ("-", "_")).split())
+                        safe_title = "_".join("".join(c for c in job.get("job_title", "") if c.isalnum() or c in ("-", "_")).split())
+                        job_dir = os.path.join("temp_jobs", f"{safe_company}_-_{safe_title}")
+                        os.makedirs(job_dir, exist_ok=True)
+
+                        output_tex_path = os.path.join(job_dir, f"Resume_{safe_company}.tex")
+
+                        target_path, ai_model_used_resume = generate_and_insert_project(
+                            job=job,
+                            cv_text=cv_text,
+                            use_generation_prompt=use_cv_prompt,
+                            file_path=resume_template_path,
+                            output_path=output_tex_path
+                        )
+
+                        with open(target_path, "r", encoding="utf-8") as f:
+                            final_resume_tex = f.read()
+
+                        resume_artifacts = generate_resume_pdf(
+                            company_name=job.get("company", ""),
+                            job_title=job.get("job_title", ""),
+                            tex_content=final_resume_tex,
+                            job_dir=job_dir
+                        )
+                        job_dir = resume_artifacts["job_dir"]
+                        all_files.update(resume_artifacts["files"])
+                    else:
+                        write_log(LOG_FILE, "Resume generation disabled, skipping")
+
                     # Generate local files
                     artifacts = generate_job_artifacts(
                         company_name=job.get("company", ""),
                         job_title=job.get("job_title", ""),
                         cover_letter_text=artifact_json.get("cover_letter", ""),
                         email_text=email_text,
-                        message_text=artifact_json.get("message", "")
+                        message_text=artifact_json.get("message", ""),
+                        job_dir=job_dir
                     )
+                    all_files.update(artifacts.get("files", {}))
 
                     # Create or get job folder in Drive
                     job_folder_id, job_folder_url = create_job_folder(job.get("company", ""), job.get("job_title", ""), root_folder_id)
                     write_log(LOG_FILE, f"Job folder ready: {job_folder_id}")
 
                     # Upload artifacts
-                    for name, path in artifacts.get("files", {}).items():
-                        mimetype = "application/pdf" if "cover_letter" in name else "text/plain"
-                        upload_job_file(job_folder_id, path, f"{name}.{'pdf' if 'cover_letter' in name else 'txt'}", mimetype)
+                    for name, path in all_files.items():
+                        if "cover_letter" in name or "resume_pdf" in name:
+                            mimetype = "application/pdf"
+                            ext = "pdf"
+                        elif "resume_tex" in name:
+                            mimetype = "application/x-tex"
+                            ext = "tex"
+                        else:
+                            mimetype = "text/plain"
+                            ext = "txt"
+                        upload_job_file(job_folder_id, path, f"{name}.{ext}", mimetype)
 
                     email_sent = False
                     if apply_email and (job.get("email", "") not in ["", "N/A"]):

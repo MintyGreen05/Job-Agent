@@ -9,3 +9,4 @@ __pycache__/
 /Run-Configs/evaluation-prompt.json
 /Run-Configs/generation-prompt.json
 /Job_Scrapers/master-input.json
+/Run-Configs/project-prompt.json

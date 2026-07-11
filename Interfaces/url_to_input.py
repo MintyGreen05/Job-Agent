@@ -205,6 +205,15 @@ def main():
                 if not isinstance(ai_result, dict):
                     raise ValueError("AI did not return a JSON/dict object.")
 
+                # Check that job_description is present and not empty/default
+                job_description = ai_result.get("job_description", "").strip()
+
+                if (
+                    not job_description or
+                    job_description == "Not specified might be in description"
+                ):
+                    raise ValueError("AI failed to extract a valid job_description.")
+                                
                 # append to output json
                 append_to_output(OUTPUT_FILE, ai_result)
                 print(f"Appended AI result for {url} to {OUTPUT_FILE}")

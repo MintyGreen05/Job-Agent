@@ -210,13 +210,10 @@ def main():
                 print(f"Appended AI result for {url} to {OUTPUT_FILE}")
 
                 # remove this url from remaining_urls and write file
-                if url in remaining_urls:
-                    remaining_urls.remove(url)
-                    write_urls(URLS_FILE, remaining_urls)
-                    print(f"Removed {url} from {URLS_FILE}")
-                else:
-                    # fallback safety: rewrite remaining_urls anyway
-                    write_urls(URLS_FILE, remaining_urls)
+                # remove all occurrences of this URL from remaining_urls and write file
+                remaining_urls = [u for u in remaining_urls if u != url]
+                write_urls(URLS_FILE, remaining_urls)
+                print(f"Removed all occurrences of {url} from {URLS_FILE}")
 
             except Exception as e:
                 print(f"Failed to process {url}: {e}")

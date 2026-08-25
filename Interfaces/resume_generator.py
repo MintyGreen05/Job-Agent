@@ -109,10 +109,15 @@ def build_resume_project_block(project_data, date="July 2026"):
     """
     project_name = escape_latex(project_data["project_name"])
     tech_stack = escape_latex(project_data["tech_stack"])
-    bullets = project_data["bullets"]
+    escaped_bullets = []
+    
+    for bullet in project_data["bullets"]:
+        # Append each escaped string to our new list
+        escaped_bullets.append(escape_latex(bullet))
 
-    bullet_one = bullets[0]
-    bullet_two = bullets[1]
+    # Grab the first two bullet points from the list
+    bullet_one = escaped_bullets[0] if len(escaped_bullets) > 0 else ""
+    bullet_two = escaped_bullets[1] if len(escaped_bullets) > 1 else ""
 
     latex_block = (
         "\\resumeProjectHeading\n"
@@ -154,7 +159,7 @@ def insert_into_file(latex_block, file_path, marker="%[Placeholder]", output_pat
 # End-to-end orchestration
 # ---------------------------------------------------------------------------
 def generate_and_insert_project(job, cv_text, use_generation_prompt, file_path,
-                                 date="July 2026", marker="%[Placeholder]",
+                                 date="August 2026", marker="%[Placeholder]",
                                  output_path=None, preferred_model="gemini-3-flash-preview"):
     print("Calling AI to generate project entry...")
     ai_result, ai_model_used = generate_project_entry(

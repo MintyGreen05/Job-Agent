@@ -23,7 +23,10 @@ ENABLE_RESUME_GENERATION =   get_field_value("B_CV_tailor", "Run-Configs/config.
 # -------------------------
 
 def _safe_name(text: str) -> str:
-    return "".join(c for c in text if c.isalnum() or c in (" ", "-", "_")).strip()
+    return "".join(
+        c for c in text
+        if c.isalnum() or c in ("-", "_")
+    )
 
 
 def _ensure_dir(path):

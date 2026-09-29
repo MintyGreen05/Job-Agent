@@ -1,0 +1,19 @@
+Subject: Application for Werkstudent Informatik (m/w/d) - Youssef Ibrahim
+
+Hello, Dear HR Team,
+
+My name is Youssef Ibrahim. I am a Computer Engineering student based in Berlin. I have taken interest in X-Visual, drawn to its mission of sustainable development and providing room for personal growth and particularly found the Werkstudent Informatik (m/w/d) role interesting, and after applying I wanted to take it a step further and reach out to the IT-Kundenprojekte team and introduce myself.
+
+I believe my experience aligns well with what the role entails, with prior experience in C# and SQL Server such as Visual Studio, ASP.NET Core, and Git, and a strong interest in software development for customer projects.
+
+I would also love to share my personal project Job Hunt Automated Agent, which shows strong independence and automation initiative here:
+https://github.com/MintyGreen05/Job-Agent
+where I automated a redundant task using AI tools and API integration and clean structural scripting.
+
+Check more of my work here:
+https://www.linkedin.com/in/youssef-habashy/
+
+Looking forward to hearing from you, and if you see me as a fit for the role I'd truly appreciate any guidance.
+
+Best regards,
+Youssef Ibrahim
